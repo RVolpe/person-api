@@ -18,7 +18,7 @@ import java.util.List;
 public class Person {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)     //campo obrigatorio
@@ -33,8 +33,9 @@ public class Person {
     @Column(nullable = false)
     private LocalDate dataNascimento;
 
+    @Column(nullable = false)
     @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
-    private List<Phone> telefone = new ArrayList<>();
+    private List<Phone> telefones = new ArrayList<>();
 
     /*--------------- Exemplo JSON:
   {
@@ -42,7 +43,7 @@ public class Person {
         "ultimoNome": "Volpe",
         "cpf": "234.567.890-33",
         "dataNascimento": "1967-11-03",
-        "telefone": [
+        "telefones": [
              {
                  "tipo": "CELULAR",
                  "numero": "(021) 99218-9693"
